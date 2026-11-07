@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "DualVision",
+  "version": "0.1.0",
+  "description": "Sincroniza play, pausa y adelantar con tu sala de DualVision en Netflix, Disney+, Prime Video, HBO Max, Crunchyroll y YouTube.",
+  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
+  "action": {
+    "default_title": "DualVision",
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png" }
+  },
+  "background": { "service_worker": "background.js" },
+  "permissions": ["storage", "alarms"],
+  "content_scripts": [
+    {
+      "matches": ["https://rodrigo9405.github.io/DUALVISION/*", "https://rodrigo9405.github.io/dualvision/*"],
+      "js": ["site.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.netflix.com/*",
+        "https://www.disneyplus.com/*",
+        "https://www.primevideo.com/*",
+        "https://www.amazon.com/*",
+        "https://*.max.com/*",
+        "https://*.hbomax.com/*",
+        "https://www.crunchyroll.com/*",
+        "https://static.crunchyroll.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": ["player.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": ["https://www.netflix.com/*"],
+      "js": ["netflix-main.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ]
+}

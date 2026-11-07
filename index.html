@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DualVision</title>
+  <meta name="description" content="Mira películas, series y videos al mismo tiempo con otra persona: sala con código, play sincronizado, cámara, micrófono y chat.">
+  <meta name="theme-color" content="#15123A">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DualVision">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:title" content="DualVision">
+  <meta property="og:description" content="Mira lo mismo, a la vez, cada uno desde su pantalla.">
+  <link rel="preload" href="fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+      <symbol id="i-mic-off" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M4 4l16 16"/></symbol>
+      <symbol id="i-cam" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="M15.5 10.5 21 7.5v9l-5.5-3"/></symbol>
+      <symbol id="i-cam-off" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="M15.5 10.5 21 7.5v9l-5.5-3M3 4l17 16"/></symbol>
+      <symbol id="i-float" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><rect x="12" y="11" width="7" height="6" rx="1.2"/></symbol>
+      <symbol id="i-change" viewBox="0 0 24 24"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-4 16-4-6.5L4 12Zm8 1.5L20 4"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 13v6.5h14V13"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Inicio -->
+  <main id="home" class="home">
+    <section class="hero" aria-labelledby="wordmark">
+      <div class="beams" aria-hidden="true"><span class="beam beam-a"></span><span class="beam beam-b"></span></div>
+      <h1 id="wordmark" class="wordmark">DualVision</h1>
+      <p class="lede">Mira lo mismo, a la vez, cada uno desde su pantalla.</p>
+    </section>
+
+    <section class="entry" aria-label="Entrar a una sala">
+      <form id="home-form" novalidate>
+        <p id="invite" class="invite" hidden></p>
+        <label class="field">
+          <span>Tu nombre</span>
+          <input id="name" name="name" maxlength="20" autocomplete="nickname" placeholder="Cómo te verán en la sala" required>
+        </label>
+        <button id="create" type="button" class="btn primary big">Crear sala</button>
+        <p class="or">o entra con el código que te pasaron</p>
+        <div class="join">
+          <label class="field code-field">
+            <span>Código</span>
+            <input id="code" name="code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123">
+          </label>
+          <button id="join" type="submit" class="btn">Entrar</button>
+        </div>
+        <p id="home-error" class="error" role="alert"></p>
+      </form>
+
+      <ol class="how">
+        <li><b>Crea una sala</b> y pasa el código o el enlace a la otra persona.</li>
+        <li><b>Elijan qué ver.</b> YouTube se ve dentro de la sala; Netflix, Disney+ y los demás se abren en la cuenta de cada uno.</li>
+        <li><b>DualVision los mantiene juntos</b> con play, pausa, chat, cámara y micrófono.</li>
+      </ol>
+      <p class="ext-cta">¿En computadora? <a id="ext-download-home" download>Descarga la extensión</a> para que Netflix, Disney+ y más se sincronicen solos. <a href="#instalar" class="quiet">Cómo instalarla</a></p>
+    </section>
+
+    <section id="instalar" class="install" aria-labelledby="install-title">
+      <h2 id="install-title">Instalar la extensión en Chrome, Edge o Brave</h2>
+      <ol>
+        <li>Descarga el archivo y descomprímelo. Queda una carpeta llamada <i>dualvision-extension</i>.</li>
+        <li>Abre <i>chrome://extensions</i> (en Edge, <i>edge://extensions</i>) y activa el <b>Modo de desarrollador</b>.</li>
+        <li>Toca <b>Cargar descomprimida</b> y elige esa carpeta.</li>
+        <li>Vuelve a DualVision y recarga la página. La extensión se une sola a tu sala.</li>
+      </ol>
+    </section>
+  </main>
+
+  <!-- Sala -->
+  <div id="room" class="room" hidden>
+    <header class="bar">
+      <span class="mini-mark" aria-hidden="true"><span></span><span></span></span>
+      <button id="code-tiles" class="code-tiles" type="button" title="Copiar código"></button>
+      <button id="share" class="btn ghost small" type="button"><svg class="ic"><use href="#i-share"/></svg><span>Invitar</span></button>
+      <span id="net" class="net" data-online="false">Conectando…</span>
+      <div id="people" class="people" aria-label="Personas en la sala"></div>
+      <button id="leave" class="btn ghost small danger" type="button">Salir</button>
+    </header>
+
+    <section class="stage-wrap">
+      <div id="stage" class="stage">
+        <section id="picker" class="picker" aria-labelledby="picker-title">
+          <h2 id="picker-title">¿Qué van a ver?</h2>
+          <div class="services">
+            <button type="button" data-service="youtube"><strong>YouTube</strong><span>Se ve aquí, dentro de la sala</span></button>
+            <button type="button" data-service="netflix"><strong>Netflix</strong><span>Cada uno con su cuenta</span></button>
+            <button type="button" data-service="disney"><strong>Disney+</strong><span>Cada uno con su cuenta</span></button>
+            <button type="button" data-service="prime"><strong>Prime Video</strong><span>Cada uno con su cuenta</span></button>
+            <button type="button" data-service="hbomax"><strong>HBO Max</strong><span>Cada uno con su cuenta</span></button>
+            <button type="button" data-service="crunchyroll"><strong>Crunchyroll</strong><span>Cada uno con su cuenta</span></button>
+            <button type="button" data-service="other"><strong>Otra</strong><span>Sincronizan con cuenta regresiva</span></button>
+          </div>
+        </section>
+
+        <section id="yt" class="yt" hidden>
+          <form id="yt-form" class="yt-form">
+            <input id="yt-url" type="url" inputmode="url" placeholder="Pega un enlace de YouTube" aria-label="Enlace de YouTube">
+            <button class="btn primary" type="submit">Poner</button>
+          </form>
+          <div class="screen">
+            <div id="yt-mount" class="yt-mount"></div>
+            <p id="yt-empty" class="empty">Pega un enlace y el video aparecerá aquí para todos. Cualquiera puede darle play o pausa.</p>
+            <button id="tap-sync" class="tap-sync" type="button" hidden>Toca para unirte a la reproducción</button>
+          </div>
+        </section>
+
+        <section id="stream" class="stream" hidden>
+          <h2 id="stream-name">Netflix</h2>
+          <p id="stream-lede" class="lede-s">Cada uno entra con su propia cuenta y elige el mismo título.</p>
+          <a id="stream-open" class="btn primary" target="_blank" rel="noopener">Abrir Netflix</a>
+          <div id="stream-ext" class="ext-note"></div>
+          <ul id="stream-live" class="live" aria-live="polite"></ul>
+          <div class="manual">
+            <h3>Darle play juntos</h3>
+            <p>Pongan el mismo minuto y toquen play cuando la cuenta llegue a cero.</p>
+            <div class="manual-row">
+              <label class="field small-field"><span>Minuto</span><input id="sync-time" inputmode="numeric" placeholder="12:34" autocomplete="off"></label>
+              <button id="sync-count" class="btn" type="button">Contar 3, 2, 1</button>
+              <button id="sync-pause" class="btn ghost" type="button">Pausa para todos</button>
+            </div>
+          </div>
+          <p id="stream-tip" class="tip"></p>
+        </section>
+
+        <div id="reactions" class="reactions" aria-hidden="true"></div>
+
+        <div id="countdown" class="overlay" hidden>
+          <p id="count-by" class="ov-by"></p>
+          <p id="count-num" class="ov-num"></p>
+          <p id="count-label" class="ov-label"></p>
+        </div>
+        <div id="pause-ov" class="overlay" hidden>
+          <p id="pause-text" class="ov-big"></p>
+          <p class="ov-label">Pausa tu video. Cuando estén listos, usen la cuenta regresiva.</p>
+        </div>
+      </div>
+
+      <nav class="controls" aria-label="Controles de la sala">
+        <button id="btn-mic" class="ctl" type="button" aria-pressed="false"><svg class="ic"><use href="#i-mic-off"/></svg><span>Micrófono</span></button>
+        <button id="btn-cam" class="ctl" type="button" aria-pressed="false"><svg class="ic"><use href="#i-cam-off"/></svg><span>Cámara</span></button>
+        <div class="reacts" role="group" aria-label="Reacciones">
+          <button type="button" data-emoji="😂" aria-label="Risa">😂</button>
+          <button type="button" data-emoji="😍" aria-label="Me encanta">😍</button>
+          <button type="button" data-emoji="😱" aria-label="Sorpresa">😱</button>
+          <button type="button" data-emoji="😭" aria-label="Llanto">😭</button>
+          <button type="button" data-emoji="🔥" aria-label="Fuego">🔥</button>
+        </div>
+        <button id="btn-float" class="ctl" type="button" aria-pressed="false"><svg class="ic"><use href="#i-float"/></svg><span>Flotante</span></button>
+        <button id="btn-change" class="ctl" type="button"><svg class="ic"><use href="#i-change"/></svg><span>Cambiar</span></button>
+      </nav>
+    </section>
+
+    <aside id="side" class="side" aria-label="Cámaras y chat">
+      <div id="tiles" class="tiles"></div>
+      <section class="chat" aria-label="Chat">
+        <ol id="messages" class="messages"></ol>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" maxlength="500" autocomplete="off" placeholder="Escribe un mensaje" aria-label="Mensaje">
+          <button type="submit" class="send" aria-label="Enviar"><svg class="ic"><use href="#i-send"/></svg></button>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="vendor/supabase.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

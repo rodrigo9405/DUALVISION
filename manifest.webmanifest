@@ -1,0 +1,17 @@
+{
+  "name": "DualVision",
+  "short_name": "DualVision",
+  "description": "Mira lo mismo, a la vez, cada uno desde su pantalla.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#15123A",
+  "theme_color": "#15123A",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "img/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

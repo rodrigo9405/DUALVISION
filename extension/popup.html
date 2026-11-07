@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>DualVision</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="mark" aria-hidden="true"><i></i><i></i></span>
+    <h1>DualVision</h1>
+  </header>
+
+  <section id="in-room" hidden>
+    <div id="code" class="code" aria-label="Código de sala"></div>
+    <p id="state" class="state"></p>
+    <ul id="members" class="members"></ul>
+    <p class="hint">Abre Netflix, Disney+, Prime Video, HBO Max, Crunchyroll o YouTube y dale play: quienes tengan la extensión se sincronizan solos.</p>
+    <button id="leave" class="btn ghost" type="button">Salir de la sala</button>
+  </section>
+
+  <section id="no-room" hidden>
+    <p class="hint">Entra a una sala desde la página de DualVision y la extensión se une sola. También puedes unirte aquí:</p>
+    <form id="form">
+      <label>Tu nombre<input id="name" maxlength="20" autocomplete="nickname" required></label>
+      <label>Código<input id="room-code" maxlength="6" autocomplete="off" spellcheck="false" required></label>
+      <p id="error" class="error" role="alert"></p>
+      <button class="btn" type="submit">Unirme</button>
+    </form>
+    <a id="open-app" class="link" target="_blank" rel="noopener">Abrir DualVision</a>
+  </section>
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

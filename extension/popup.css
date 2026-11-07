@@ -1,0 +1,29 @@
+@font-face { font-family: 'Big Shoulders Display'; font-weight: 800; src: url('fonts/big-shoulders-display-latin-800-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Sans'; font-weight: 400; src: url('fonts/instrument-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Sans'; font-weight: 600; src: url('fonts/instrument-sans-latin-600-normal.woff2') format('woff2'); }
+:root { --ink: #15123a; --ink-2: #1e1a4c; --line: #3a3480; --fog: #aaa5d8; --paper: #f4f2ff; --you: #ffb547; --them: #46d9e6; --danger: #ff6b7f; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; width: 300px; padding: 14px 16px 16px; background: var(--ink); color: var(--paper); font: 400 14px/1.45 'Instrument Sans', system-ui, sans-serif; }
+[hidden] { display: none !important; }
+header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+h1 { margin: 0; font: 800 26px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; }
+.mark { position: relative; width: 30px; height: 19px; }
+.mark i { position: absolute; top: 0; width: 19px; height: 19px; border-radius: 50%; mix-blend-mode: screen; }
+.mark i:first-child { left: 0; background: var(--you); } .mark i:last-child { right: 0; background: var(--them); }
+.code { display: flex; gap: 3px; }
+.code span { display: grid; place-items: center; width: 30px; height: 40px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 5px; font: 800 26px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; color: var(--you); }
+.state { margin: 8px 0 4px; color: var(--fog); }
+.state.on::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #b6f36b; margin-right: 6px; }
+.members { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 2px; }
+.members li { font-weight: 600; }
+.members small { color: var(--fog); font-weight: 400; }
+.hint { color: var(--fog); margin: 0 0 12px; }
+form { display: grid; gap: 10px; }
+label { display: grid; gap: 4px; color: var(--fog); font-size: 13px; }
+input { min-height: 38px; padding: 0 10px; background: var(--ink-2); border: 1.5px solid var(--line); border-radius: 7px; color: var(--paper); font: inherit; font-size: 15px; }
+#room-code { font: 800 22px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+input:focus { outline: none; border-color: var(--them); }
+.btn { width: 100%; min-height: 40px; border: 0; border-radius: 7px; background: var(--you); color: var(--ink); font: 600 15px/1 'Instrument Sans', system-ui, sans-serif; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--danger); border: 1.5px solid color-mix(in srgb, var(--danger) 50%, transparent); }
+.error { margin: 0; color: var(--danger); min-height: 0; }
+.link { display: block; margin-top: 12px; color: var(--them); }
